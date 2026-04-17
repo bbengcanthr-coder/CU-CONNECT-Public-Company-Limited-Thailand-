@@ -4,721 +4,585 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BCU CONNECT Public Company Limited</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <style>
-        /* ตัวแปรสีหลัก */
-        :root {
-            --primary-red: #d32f2f;
-            --dark-red: #8b0000;
-            --black: #111111;
-            --white: #ffffff;
-            --light-gray: #f8f9fa;
-            --text-dark: #333333;
-            --text-light: #777777;
-            --gradient-red-black: linear-gradient(135deg, #d32f2f 0%, #111111 100%);
-        }
-
-        /* รีเซ็ตค่าเริ่มต้น */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Kanit', sans-serif;
-            scroll-behavior: smooth;
-        }
-
-        body {
-            background-color: var(--white);
-            color: var(--text-dark);
-            line-height: 1.6;
-        }
-
-        /* เมนูนำทาง (Navbar) */
-        header {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background-color: rgba(255, 255, 255, 0.95);
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-            z-index: 1000;
-            backdrop-filter: blur(10px);
-        }
-
-        .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 5%;
-            max-width: 1400px;
-            margin: auto;
-        }
-
-        .logo {
-            font-size: 1.5rem;
-            font-weight: 700;
-            background: var(--gradient-red-black);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-decoration: none;
-        }
-
-        .nav-links {
-            display: flex;
-            list-style: none;
-        }
-
-        .nav-links li {
-            margin-left: 30px;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: var(--black);
-            font-weight: 500;
-            font-size: 1rem;
-            transition: color 0.3s ease;
-        }
-
-        .nav-links a:hover {
-            color: var(--primary-red);
-        }
-
-        .menu-toggle {
-            display: none;
-            cursor: pointer;
-            font-size: 1.5rem;
-            color: var(--black);
-        }
-
-        /* โครงสร้าง Section */
-        section {
-            padding: 100px 5%;
-            max-width: 1400px;
-            margin: auto;
-        }
-
-        .section-title {
-            text-align: center;
-            font-size: 2.5rem;
-            font-weight: 600;
-            margin-bottom: 50px;
-            color: var(--black);
-            position: relative;
-        }
-
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 60px;
-            height: 4px;
-            background: var(--gradient-red-black);
-            border-radius: 2px;
-        }
-
-        /* ฮีโร่แบนเนอร์ (Hero Section) */
-        .hero {
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            background: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.8)), 
-                        url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop') center/cover;
-            padding: 0 5%;
-            margin-top: 0;
-            max-width: 100%;
-        }
-
-        .hero-content h1 {
-            font-size: 4rem;
-            font-weight: 700;
-            margin-bottom: 20px;
-            color: var(--black);
-        }
-
-        .hero-content h1 span {
-            background: var(--gradient-red-black);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .hero-content p {
-            font-size: 1.2rem;
-            color: var(--text-light);
-            margin-bottom: 30px;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .btn {
-            display: inline-block;
-            padding: 12px 30px;
-            background: var(--gradient-red-black);
-            color: var(--white);
-            text-decoration: none;
-            border-radius: 30px;
-            font-weight: 500;
-            transition: transform 0.3s, box-shadow 0.3s;
-            border: none;
-            cursor: pointer;
-        }
-
-        .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(211, 47, 47, 0.2);
-        }
-
-        /* ประวัติบริษัท (About) */
-        .about-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 50px;
-            align-items: center;
-        }
-
-        .about-img {
-            width: 100%;
-            border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-        }
-
-        .about-text h3 {
-            font-size: 1.8rem;
-            margin-bottom: 15px;
-            color: var(--black);
-        }
-
-        .about-text p {
-            margin-bottom: 15px;
-            color: var(--text-light);
-        }
-
-        /* โครงสร้างองค์กร & ตำแหน่ง (Org Structure) */
-        .org-container {
-            background: var(--light-gray);
-            border-radius: 20px;
-            padding: 50px;
-        }
-
-        .dept-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin-top: 40px;
-        }
-
-        .dept-card {
-            background: var(--white);
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            transition: transform 0.3s ease;
-            border-top: 4px solid var(--primary-red);
-        }
-
-        .dept-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .dept-card h4 {
-            font-size: 1.4rem;
-            color: var(--black);
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .dept-card h4 i {
-            color: var(--primary-red);
-        }
-
-        .job-list {
-            list-style: none;
-        }
-
-        .job-list li {
-            margin-bottom: 10px;
-            padding-bottom: 10px;
-            border-bottom: 1px solid #eee;
-            font-size: 0.95rem;
-            color: var(--text-dark);
-        }
-
-        .job-list li:last-child {
-            border-bottom: none;
-            margin-bottom: 0;
-            padding-bottom: 0;
-        }
-
-        .job-list li span {
-            display: block;
-            font-size: 0.8rem;
-            color: var(--text-light);
-            margin-top: 2px;
-        }
-
-        /* ประชาสัมพันธ์ (PR/News) */
-        .news-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 30px;
-        }
-
-        .news-card {
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
-            background: var(--white);
-        }
-
-        .news-img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-        }
-
-        .news-content {
-            padding: 25px;
-        }
-
-        .news-date {
-            font-size: 0.85rem;
-            color: var(--primary-red);
-            font-weight: 500;
-            margin-bottom: 10px;
-            display: block;
-        }
-
-        .news-title {
-            font-size: 1.2rem;
-            margin-bottom: 10px;
-            color: var(--black);
-        }
-
-        .news-desc {
-            color: var(--text-light);
-            font-size: 0.9rem;
-            margin-bottom: 20px;
-        }
-
-        /* กฎระเบียบ (Rules & Dress Code) */
-        .rules-wrapper {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
-        }
-
-        .rule-box {
-            background: var(--white);
-            padding: 40px;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .rule-box::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 5px;
-            background: var(--gradient-red-black);
-        }
-
-        .rule-box h3 {
-            font-size: 1.5rem;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .rule-list {
-            list-style: none;
-        }
-
-        .rule-list li {
-            position: relative;
-            padding-left: 30px;
-            margin-bottom: 15px;
-            color: var(--text-dark);
-        }
-
-        .rule-list li::before {
-            content: '\f00c';
-            font-family: 'Font Awesome 6 Free';
-            font-weight: 900;
-            position: absolute;
-            left: 0;
-            top: 2px;
-            color: var(--primary-red);
-        }
-
-        /* Footer */
-        footer {
-            background: var(--black);
-            color: var(--white);
-            padding: 60px 5% 20px;
-            margin-top: 50px;
-        }
-
-        .footer-content {
-            max-width: 1400px;
-            margin: auto;
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr;
-            gap: 40px;
-            margin-bottom: 40px;
-        }
-
-        .footer-logo {
-            font-size: 1.8rem;
-            font-weight: 700;
-            margin-bottom: 15px;
-            background: linear-gradient(135deg, #ff4d4d 0%, #ffffff 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .footer-text p {
-            color: #aaaaaa;
-            margin-bottom: 10px;
-        }
-
-        .footer-links h4 {
-            font-size: 1.2rem;
-            margin-bottom: 20px;
-            position: relative;
-            padding-bottom: 10px;
-        }
-
-        .footer-links h4::after {
-            content: '';
-            position: absolute;
-            left: 0;
-            bottom: 0;
-            width: 30px;
-            height: 2px;
-            background: var(--primary-red);
-        }
-
-        .footer-links ul {
-            list-style: none;
-        }
-
-        .footer-links li {
-            margin-bottom: 10px;
-        }
-
-        .footer-links a {
-            color: #aaaaaa;
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-
-        .footer-links a:hover {
-            color: var(--white);
-        }
-
-        .footer-bottom {
-            text-align: center;
-            padding-top: 20px;
-            border-top: 1px solid #333;
-            color: #777;
-            font-size: 0.9rem;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 992px) {
-            .hero-content h1 { font-size: 3rem; }
-            .about-grid, .rules-wrapper, .footer-content { grid-template-columns: 1fr; }
-        }
-
-        @media (max-width: 768px) {
-            .menu-toggle { display: block; }
-            .nav-links {
-                position: absolute;
-                top: 100%;
-                left: -100%;
-                width: 100%;
-                height: 100vh;
-                background: var(--white);
-                flex-direction: column;
-                align-items: center;
-                padding-top: 50px;
-                transition: left 0.3s ease;
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Kanit', 'sans-serif'] },
+                    colors: {
+                        bcu: { red: '#D32F2F', dark: '#111111', gray: '#F9FAFB' }
+                    }
+                }
             }
-            .nav-links.active { left: 0; }
-            .nav-links li { margin: 20px 0; }
-            .nav-links a { font-size: 1.2rem; }
-            .hero-content h1 { font-size: 2.5rem; }
-            section { padding: 60px 5%; }
-            .dept-grid, .news-grid { grid-template-columns: 1fr; }
         }
+    </script>
+    <style>
+        html { scroll-behavior: smooth; }
+        .gradient-text {
+            background: linear-gradient(90deg, #D32F2F 0%, #111111 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .gradient-bg {
+            background: linear-gradient(135deg, #D32F2F 0%, #111111 100%);
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+        /* ซ่อน Scrollbar แต่ยัง Scroll ได้ */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f1f1; }
+        ::-webkit-scrollbar-thumb { background: #D32F2F; border-radius: 4px; }
     </style>
 </head>
-<body>
+<body class="font-sans text-gray-800 bg-white antialiased">
 
-    <header>
-        <nav class="navbar">
-            <a href="#" class="logo">BCU CONNECT</a>
-            <ul class="nav-links">
-                <li><a href="#home" class="nav-item">หน้าแรก</a></li>
-                <li><a href="#about" class="nav-item">ประวัติบริษัท</a></li>
-                <li><a href="#structure" class="nav-item">โครงสร้างองค์กร</a></li>
-                <li><a href="#news" class="nav-item">ข่าวสาร</a></li>
-                <li><a href="#rules" class="nav-item">กฎระเบียบ</a></li>
-            </ul>
-            <div class="menu-toggle">
-                <i class="fas fa-bars"></i>
-            </div>
-        </nav>
-    </header>
-
-    <section id="home" class="hero">
-        <div class="hero-content">
-            <h1>เชื่อมต่อทุกความเป็นไปได้ <br><span>สู่โลกอนาคต</span></h1>
-            <p>บริษัท บีซียู คอนเนค จำกัด (มหาชน) ผู้นำด้านเครือข่ายสื่อสารและโทรคมนาคมขนานใหญ่ของประเทศไทย มุ่งมั่นพัฒนาโครงสร้างพื้นฐานเพื่อขับเคลื่อนเศรษฐกิจดิจิทัล</p>
-            <a href="#about" class="btn">ทำความรู้จักเรา</a>
+    <div class="bg-bcu-dark text-white text-xs py-2 px-4 flex justify-between items-center overflow-hidden">
+        <div class="flex space-x-6 animate-pulse">
+            <span><i class="fa-solid fa-chart-line text-red-500 mr-2"></i><strong>BCU (SET)</strong> 145.50 THB <span class="text-green-400">▲ +2.30 (+1.58%)</span></span>
+            <span class="hidden sm:inline">Volume: 12,450,200</span>
+            <span class="hidden md:inline">Market Cap: 450,000 MB</span>
         </div>
-    </section>
-
-    <section id="about">
-        <h2 class="section-title">ประวัติบริษัท</h2>
-        <div class="about-grid">
-            <div class="about-text">
-                <h3>BCU CONNECT Public Company Limited (Thailand)</h3>
-                <p>ก่อตั้งขึ้นด้วยวิสัยทัศน์ที่มุ่งมั่นจะเป็นแกนกลางในการเชื่อมต่อผู้คน ธุรกิจ และเทคโนโลยีเข้าด้วยกัน เราคือผู้ให้บริการเครือข่ายสื่อสารและโทรคมนาคมแบบครบวงจรระดับประเทศ</p>
-                <p>จากจุดเริ่มต้นเล็กๆ เราได้ขยายโครงข่ายไฟเบอร์ออปติกและระบบสัญญาณไร้สายครอบคลุมทั่วประเทศ ปัจจุบันเรากำลังก้าวเข้าสู่ยุค 6G และเทคโนโลยีโครงสร้างพื้นฐานระดับองค์กร (Enterprise Solutions) เพื่อรองรับการเติบโตของเทคโนโลยี AI และ IoT อย่างเต็มรูปแบบ</p>
-                <p><strong>วิสัยทัศน์:</strong> "Empowering the Nation through Limitless Connectivity" <br>สร้างพลังให้ประเทศผ่านการเชื่อมต่อที่ไร้ขีดจำกัด</p>
-            </div>
-            <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2069&auto=format&fit=crop" alt="BCU Connect Office" class="about-img">
+        <div class="flex space-x-4">
+            <a href="#ir" class="hover:text-red-400 transition">Investor Relations</a>
+            <a href="#esg" class="hover:text-red-400 transition">ESG</a>
         </div>
-    </section>
+    </div>
 
-    <section id="structure" class="org-container">
-        <h2 class="section-title">โครงสร้างองค์กรและตำแหน่งงาน</h2>
-        <p style="text-align: center; color: var(--text-light); max-width: 800px; margin: 0 auto;">โครงสร้างการบริหารงานของเราถูกออกแบบมาเพื่อความคล่องตัว โปร่งใส และขับเคลื่อนด้วยนวัตกรรม แบ่งสายงานอย่างชัดเจนเพื่อประสิทธิภาพสูงสุดในการให้บริการ</p>
+    <nav class="sticky top-0 z-50 glass-panel shadow-sm transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20">
+                <div class="flex items-center">
+                    <a href="#" class="text-2xl font-bold tracking-tighter gradient-text">BCU CONNECT</a>
+                    <span class="ml-2 text-xs text-gray-500 hidden sm:block border-l pl-2 border-gray-300">Public Company Limited</span>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#about" class="text-gray-600 hover:text-bcu-red font-medium transition">เกี่ยวกับเรา</a>
+                    <a href="#services" class="text-gray-600 hover:text-bcu-red font-medium transition">ธุรกิจและบริการ</a>
+                    <a href="#organization" class="text-gray-600 hover:text-bcu-red font-medium transition">องค์กรและร่วมงาน</a>
+                    <a href="#culture" class="text-gray-600 hover:text-bcu-red font-medium transition">วัฒนธรรม</a>
+                    <a href="#contact" class="gradient-bg text-white px-5 py-2 rounded-full font-medium hover:shadow-lg transition transform hover:-translate-y-0.5">ติดต่อเรา</a>
+                </div>
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-gray-600 hover:text-bcu-red focus:outline-none">
+                        <i class="fa-solid fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 shadow-lg">
+                <a href="#about" class="block px-3 py-2 text-gray-600 hover:text-bcu-red font-medium">เกี่ยวกับเรา</a>
+                <a href="#services" class="block px-3 py-2 text-gray-600 hover:text-bcu-red font-medium">ธุรกิจและบริการ</a>
+                <a href="#organization" class="block px-3 py-2 text-gray-600 hover:text-bcu-red font-medium">องค์กรและร่วมงาน</a>
+                <a href="#culture" class="block px-3 py-2 text-gray-600 hover:text-bcu-red font-medium">วัฒนธรรม</a>
+                <a href="#contact" class="block px-3 py-2 text-bcu-red font-medium">ติดต่อเรา</a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="relative pt-24 pb-32 flex items-center justify-center min-h-[80vh] overflow-hidden">
+        <div class="absolute inset-0 z-0 opacity-10">
+            <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop" alt="Network" class="w-full h-full object-cover">
+        </div>
+        <div class="absolute inset-0 z-0 bg-gradient-to-b from-white/50 to-white"></div>
         
-        <div class="dept-grid">
-            <div class="dept-card">
-                <h4><i class="fas fa-sitemap"></i> Board of Executives</h4>
-                <ul class="job-list">
-                    <li>Chief Executive Officer (CEO) <span>ประธานเจ้าหน้าที่บริหาร</span></li>
-                    <li>Chief Technology Officer (CTO) <span>ประธานเจ้าหน้าที่ฝ่ายเทคโนโลยี</span></li>
-                    <li>Chief Financial Officer (CFO) <span>ประธานเจ้าหน้าที่ฝ่ายการเงิน</span></li>
-                    <li>Chief Operating Officer (COO) <span>ประธานเจ้าหน้าที่ฝ่ายปฏิบัติการ</span></li>
-                </ul>
-            </div>
-
-            <div class="dept-card">
-                <h4><i class="fas fa-network-wired"></i> Technology & Engineering</h4>
-                <ul class="job-list">
-                    <li>Senior Network Architect <span>ผู้ออกแบบและวางระบบโครงข่ายสื่อสาร</span></li>
-                    <li>Telecommunication Engineer <span>วิศวกรโทรคมนาคม (ดูแลเสาสัญญาณ/Fiber)</span></li>
-                    <li>Cybersecurity Analyst <span>นักวิเคราะห์ความปลอดภัยทางไซเบอร์</span></li>
-                    <li>Full Stack Developer <span>นักพัฒนาซอฟต์แวร์และระบบภายใน</span></li>
-                    <li>System Administrator <span>ผู้ดูแลและบริหารจัดการเซิร์ฟเวอร์</span></li>
-                </ul>
-            </div>
-
-            <div class="dept-card">
-                <h4><i class="fas fa-users"></i> Human Resources (HR)</h4>
-                <ul class="job-list">
-                    <li>HR Director <span>ผู้อำนวยการฝ่ายทรัพยากรบุคคล</span></li>
-                    <li>Talent Acquisition Specialist <span>เจ้าหน้าที่สรรหาบุคลากร</span></li>
-                    <li>HR Generalist / Admin <span>เจ้าหน้าที่ธุรการและบุคคลทั่วไป</span></li>
-                    <li>Compensation & Benefits Analyst <span>เจ้าหน้าที่วิเคราะห์ผลตอบแทนและสวัสดิการ</span></li>
-                    <li>Employee Relations Officer <span>เจ้าหน้าที่พนักงานสัมพันธ์ (ดูแลสภาพแวดล้อมการทำงาน)</span></li>
-                </ul>
-            </div>
-
-            <div class="dept-card">
-                <h4><i class="fas fa-chart-pie"></i> Finance & Accounting</h4>
-                <ul class="job-list">
-                    <li>Financial Controller <span>ผู้ควบคุมและบริหารการเงิน</span></li>
-                    <li>Senior Accountant <span>สมุห์บัญชี / นักบัญชีอาวุโส</span></li>
-                    <li>AR/AP Specialist <span>เจ้าหน้าที่บัญชีลูกหนี้ / เจ้าหนี้</span></li>
-                    <li>Internal Auditor <span>ผู้ตรวจสอบภายใน</span></li>
-                    <li>Tax Specialist <span>ผู้เชี่ยวชาญด้านภาษีอากร</span></li>
-                </ul>
-            </div>
-
-            <div class="dept-card">
-                <h4><i class="fas fa-bullhorn"></i> Marketing & PR</h4>
-                <ul class="job-list">
-                    <li>Marketing Director <span>ผู้อำนวยการฝ่ายการตลาด</span></li>
-                    <li>Public Relations (PR) Manager <span>ผู้จัดการฝ่ายประชาสัมพันธ์องค์กร</span></li>
-                    <li>Digital Marketing Specialist <span>ผู้เชี่ยวชาญด้านการตลาดดิจิทัล</span></li>
-                    <li>Corporate Communications <span>เจ้าหน้าที่สื่อสารองค์กร</span></li>
-                    <li>Graphic Designer / Content Creator <span>นักออกแบบกราฟิกและสร้างสรรค์เนื้อหา</span></li>
-                </ul>
-            </div>
-
-            <div class="dept-card">
-                <h4><i class="fas fa-headset"></i> Sales & Customer Support</h4>
-                <ul class="job-list">
-                    <li>Enterprise Account Executive <span>ผู้จัดการฝ่ายขายลูกค้าองค์กร</span></li>
-                    <li>Customer Success Manager <span>ผู้จัดการฝ่ายความสำเร็จของลูกค้า</span></li>
-                    <li>Technical Support Specialist <span>ผู้เชี่ยวชาญด้านสนับสนุนทางเทคนิค</span></li>
-                    <li>Call Center Representative <span>เจ้าหน้าที่บริการลูกค้าสัมพันธ์</span></li>
-                </ul>
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h1 class="text-5xl md:text-7xl font-bold tracking-tight mb-6">
+                Connecting the Future <br>
+                <span class="gradient-text">Beyond Boundaries</span>
+            </h1>
+            <p class="mt-4 max-w-2xl text-lg md:text-xl text-gray-600 mx-auto mb-10">
+                บีซียู คอนเนค จำกัด (มหาชน) ผู้นำด้านเครือข่ายสื่อสารและเทคโนโลยีดิจิทัลระดับประเทศ ขับเคลื่อนธุรกิจและสังคมไทยด้วยนวัตกรรม 5G, Cloud และ AI
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="#services" class="gradient-bg text-white px-8 py-4 rounded-full font-bold text-lg hover:shadow-xl transition transform hover:-translate-y-1">
+                    ดูบริการของเรา
+                </a>
+                <a href="#ir" class="bg-white text-bcu-dark border-2 border-bcu-dark px-8 py-4 rounded-full font-bold text-lg hover:bg-gray-50 transition transform hover:-translate-y-1">
+                    ข้อมูลนักลงทุนสัมพันธ์
+                </a>
             </div>
         </div>
     </section>
 
-    <section id="news">
-        <h2 class="section-title">ข่าวสารและประชาสัมพันธ์</h2>
-        <div class="news-grid">
-            <div class="news-card">
-                <img src="https://images.unsplash.com/photo-1573164713988-8665fc963095?q=80&w=2069&auto=format&fit=crop" alt="News 1" class="news-img">
-                <div class="news-content">
-                    <span class="news-date">12 ตุลาคม 2567</span>
-                    <h3 class="news-title">BCU CONNECT ขยายโครงข่ายใยแก้วนำแสงคลุมพื้นที่อุตสาหกรรม EEC</h3>
-                    <p class="news-desc">ยกระดับศักยภาพการสื่อสารภาคธุรกิจ รองรับฐานการผลิตแห่งอนาคตด้วยความเร็วระดับ 100Gbps...</p>
-                    <a href="#" style="color: var(--primary-red); text-decoration: none; font-weight: 500;">อ่านเพิ่มเติม <i class="fas fa-arrow-right"></i></a>
+    <section id="about" class="py-20 bg-bcu-gray">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h2 class="text-sm font-bold text-bcu-red uppercase tracking-wider mb-2">เกี่ยวกับเรา (About Us)</h2>
+                    <h3 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6">สร้างเครือข่ายที่ทรงพลัง <br>เพื่ออนาคตที่ยั่งยืน</h3>
+                    <p class="text-gray-600 mb-4 leading-relaxed">
+                        ก่อตั้งขึ้นในปี พ.ศ. 2540 บริษัท บีซียู คอนเนค จำกัด (มหาชน) ได้พัฒนาจากการเป็นผู้ให้บริการโครงข่ายโทรคมนาคมพื้นฐาน ก้าวสู่การเป็น Tech Company เต็มรูปแบบ เรามุ่งมั่นพัฒนาโครงสร้างพื้นฐานด้านดิจิทัลระดับประเทศ
+                    </p>
+                    <p class="text-gray-600 mb-8 leading-relaxed">
+                        ปัจจุบัน BCU ให้บริการครอบคลุมทั้งลูกค้าองค์กร (B2B) และลูกค้ารายย่อย (B2C) ด้วยโครงข่าย Fiber Optic ที่ยาวที่สุดในประเทศ และเสาสัญญาณ 5G ที่ครอบคลุม 99% ของประชากร
+                    </p>
+                    <div class="grid grid-cols-2 gap-6">
+                        <div class="border-l-4 border-bcu-red pl-4">
+                            <h4 class="text-2xl font-bold text-gray-900">25+</h4>
+                            <p class="text-sm text-gray-500">ปีแห่งความเชี่ยวชาญ</p>
+                        </div>
+                        <div class="border-l-4 border-gray-900 pl-4">
+                            <h4 class="text-2xl font-bold text-gray-900">15M+</h4>
+                            <p class="text-sm text-gray-500">ผู้ใช้งานทั่วประเทศ</p>
+                        </div>
+                    </div>
                 </div>
-            </div>
-
-            <div class="news-card">
-                <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=2070&auto=format&fit=crop" alt="News 2" class="news-img">
-                <div class="news-content">
-                    <span class="news-date">5 กันยายน 2567</span>
-                    <h3 class="news-title">ประกาศผลประกอบการไตรมาสที่ 3 เติบโตทะลุเป้า 15%</h3>
-                    <p class="news-desc">จากความสำเร็จในการเจาะตลาด Enterprise Solutions และการบริหารจัดการต้นทุนที่มีประสิทธิภาพ...</p>
-                    <a href="#" style="color: var(--primary-red); text-decoration: none; font-weight: 500;">อ่านเพิ่มเติม <i class="fas fa-arrow-right"></i></a>
-                </div>
-            </div>
-
-            <div class="news-card">
-                <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=2070&auto=format&fit=crop" alt="News 3" class="news-img">
-                <div class="news-content">
-                    <span class="news-date">20 สิงหาคม 2567</span>
-                    <h3 class="news-title">โครงการ CSR: เชื่อมเน็ตเพื่อน้อง มอบอินเทอร์เน็ตฟรี 50 โรงเรียน</h3>
-                    <p class="news-desc">สานต่อปณิธานด้านความรับผิดชอบต่อสังคม ลดความเหลื่อมล้ำทางการศึกษาผ่านเทคโนโลยี...</p>
-                    <a href="#" style="color: var(--primary-red); text-decoration: none; font-weight: 500;">อ่านเพิ่มเติม <i class="fas fa-arrow-right"></i></a>
+                <div class="relative rounded-2xl overflow-hidden shadow-2xl group">
+                    <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2070&auto=format&fit=crop" alt="Data Center" class="w-full h-full object-cover transform group-hover:scale-105 transition duration-700">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex items-end p-8">
+                        <div class="text-white">
+                            <h4 class="text-xl font-bold">BCU Main Data Center</h4>
+                            <p class="text-sm text-gray-300">ศูนย์ข้อมูลระดับ Tier IV ที่มีความปลอดภัยสูงสุด</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="rules" style="background-color: var(--light-gray);">
-        <h2 class="section-title">วัฒนธรรมองค์กรและกฎระเบียบ</h2>
-        <div class="rules-wrapper">
-            
-            <div class="rule-box">
-                <h3><i class="fas fa-balance-scale"></i> กฎระเบียบและข้อบังคับบริษัท</h3>
-                <ul class="rule-list">
-                    <li><strong>เวลาปฏิบัติงาน:</strong> ทำงานวันจันทร์ - ศุกร์ (Flexible Hours เข้างานระหว่าง 08:00 - 10:00 น. เลิกงาน 17:00 - 19:00 น. รวม 8 ชั่วโมง/วัน)</li>
-                    <li><strong>ความลับของบริษัท:</strong> พนักงานทุกระดับต้องลงนามในสัญญา NDA ข้อมูลเครือข่ายและฐานข้อมูลลูกค้าถือเป็นความลับสูงสุดทางธุรกิจ (Data Privacy & PDPA)</li>
-                    <li><strong>การใช้อุปกรณ์ส่วนกลาง:</strong> ห้ามนำอุปกรณ์ IT หรือระบบเซิร์ฟเวอร์ของบริษัทไปใช้งานส่วนตัว หรือละเมิด พ.ร.บ. คอมพิวเตอร์เด็ดขาด</li>
-                    <li><strong>จรรยาบรรณวิชาชีพ:</strong> ห้ามรับสินบน บริหารงานด้วยความโปร่งใส (Anti-Corruption) และเคารพความหลากหลายของเพื่อนร่วมงาน (Diversity & Inclusion)</li>
-                    <li><strong>นโยบาย Work From Anywhere (WFA):</strong> พนักงานในแผนกที่รองรับ สามารถขอใช้สิทธิ์ WFA ได้สูงสุด 2 วัน/สัปดาห์ (ต้องแจ้งหัวหน้างานล่วงหน้า)</li>
-                </ul>
+    <section id="services" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-sm font-bold text-bcu-red uppercase tracking-wider mb-2">ผลิตภัณฑ์และบริการ</h2>
+                <h3 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">โซลูชันครบวงจรสำหรับทุกภาคส่วน</h3>
+                <p class="text-gray-600">รองรับการเติบโตทางธุรกิจขององค์กร และตอบสนองไลฟ์สไตล์ดิจิทัลของผู้บริโภค</p>
             </div>
 
-            <div class="rule-box">
-                <h3><i class="fas fa-user-tie"></i> ระเบียบการแต่งกาย</h3>
-                <ul class="rule-list">
-                    <li><strong>วันจันทร์ - พฤหัสบดี (Smart Casual):</strong> 
-                        <br>แต่งกายสุภาพ ทันสมัย ไม่จำเป็นต้องผูกเนคไท 
-                        <br>- <em>ผู้ชาย:</em> เสื้อเชิ้ต หรือเสื้อโปโลบริษัท กางเกงสแล็ค หรือกางเกงยีนส์สีเข้ม (ห้ามมีรอยขาด) รองเท้าหนัง หรือรองเท้าผ้าใบหุ้มส้นที่สะอาด
-                        <br>- <em>ผู้หญิง:</em> ชุดเดรส เสื้อสุภาพ กางเกงหรือกระโปรงยาวระดับเข่า รองเท้าคัทชู หรือรองเท้าหุ้มส้น
-                    </li>
-                    <li><strong>วันศุกร์ (Casual Friday):</strong> 
-                        <br>สามารถแต่งกายสบายๆ ได้ แต่ยังคงความสุภาพ ห้ามสวมกางเกงขาสั้น รองเท้าแตะ หรือเสื้อกล้าม เข้าในพื้นที่สำนักงานใหญ่เด็ดขาด
-                    </li>
-                    <li><strong>พนักงานปฏิบัติการภาคสนาม (Field Engineer):</strong> 
-                        <br>ต้องสวมชุดยูนิฟอร์มช่างของ BCU CONNECT พร้อมเสื้อสะท้อนแสง รองเท้าเซฟตี้ (Safety Shoes) และอุปกรณ์ป้องกันตามมาตรฐานความปลอดภัย (สวมหมวกนิรภัยเมื่อเข้าพื้นที่)
-                    </li>
-                    <li><strong>การประชุมกับลูกค้าองค์กร (Client Meetings):</strong> 
-                        <br>พนักงานเซลล์หรือผู้บริหารต้องแต่งกายชุดสูทสากล (Business Formal) เพื่อภาพลักษณ์ที่เป็นมืออาชีพ
-                    </li>
-                </ul>
-            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-bcu-gray rounded-2xl p-8 hover:shadow-xl transition duration-300 border border-gray-100">
+                    <div class="w-14 h-14 gradient-bg rounded-xl flex items-center justify-center text-white text-2xl mb-6 shadow-lg">
+                        <i class="fa-solid fa-building"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-gray-900 mb-3">Enterprise Solutions (B2B)</h4>
+                    <p class="text-gray-600 text-sm mb-4">บริการยกระดับโครงสร้างพื้นฐานไอทีสำหรับองค์กร</p>
+                    <ul class="space-y-2 text-sm text-gray-600 mb-6">
+                        <li><i class="fa-solid fa-check text-bcu-red mr-2"></i> Cloud Computing & Storage</li>
+                        <li><i class="fa-solid fa-check text-bcu-red mr-2"></i> Data Center Co-location</li>
+                        <li><i class="fa-solid fa-check text-bcu-red mr-2"></i> Cyber Security Operations</li>
+                    </ul>
+                </div>
 
+                <div class="bg-bcu-gray rounded-2xl p-8 hover:shadow-xl transition duration-300 border border-gray-100">
+                    <div class="w-14 h-14 gradient-bg rounded-xl flex items-center justify-center text-white text-2xl mb-6 shadow-lg">
+                        <i class="fa-solid fa-wifi"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-gray-900 mb-3">Consumer Plans (B2C)</h4>
+                    <p class="text-gray-600 text-sm mb-4">เครือข่ายไร้สายและอินเทอร์เน็ตบ้านความเร็วสูง</p>
+                    <ul class="space-y-2 text-sm text-gray-600 mb-6">
+                        <li><i class="fa-solid fa-check text-bcu-red mr-2"></i> 5G / 6G Mobile Network</li>
+                        <li><i class="fa-solid fa-check text-bcu-red mr-2"></i> Ultra-Speed Fiber Optic</li>
+                        <li><i class="fa-solid fa-check text-bcu-red mr-2"></i> Smart Home IoT Devices</li>
+                    </ul>
+                </div>
+
+                <div class="bg-bcu-gray rounded-2xl p-8 hover:shadow-xl transition duration-300 border border-gray-100">
+                    <div class="w-14 h-14 gradient-bg rounded-xl flex items-center justify-center text-white text-2xl mb-6 shadow-lg">
+                        <i class="fa-solid fa-users"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-gray-900 mb-3">BCU Community Platform</h4>
+                    <p class="text-gray-600 text-sm mb-4">แพลตฟอร์มดิจิทัลเชื่อมโยงผู้ใช้งานและลูกค้า</p>
+                    <ul class="space-y-2 text-sm text-gray-600 mb-6">
+                        <li><i class="fa-solid fa-check text-bcu-red mr-2"></i> ระบบ CRM & Privilege Program</li>
+                        <li><i class="fa-solid fa-check text-bcu-red mr-2"></i> เว็บบอร์ดและสื่อสารภายในเครือข่าย</li>
+                        <li><i class="fa-solid fa-check text-bcu-red mr-2"></i> Digital Payment Gateway</li>
+                    </ul>
+                </div>
+            </div>
         </div>
     </section>
 
-    <footer>
-        <div class="footer-content">
-            <div class="footer-text">
-                <h2 class="footer-logo">BCU CONNECT</h2>
-                <p>บริษัท บีซียู คอนเนค จำกัด (มหาชน)</p>
-                <p>ผู้นำด้านโครงข่ายโทรคมนาคมแห่งอนาคต</p>
-                <div style="margin-top: 20px; font-size: 1.5rem; display: flex; gap: 15px;">
-                    <a href="#" style="color: #fff;"><i class="fab fa-facebook"></i></a>
-                    <a href="#" style="color: #fff;"><i class="fab fa-linkedin"></i></a>
-                    <a href="#" style="color: #fff;"><i class="fab fa-twitter"></i></a>
+    <section id="ir" class="py-24 bg-gray-900 text-white relative overflow-hidden">
+        <div class="absolute -top-24 -right-24 w-96 h-96 bg-red-600 rounded-full mix-blend-multiply filter blur-3xl opacity-20"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-12 border-b border-gray-800 pb-6">
+                <div>
+                    <h2 class="text-sm font-bold text-red-500 uppercase tracking-wider mb-2">นักลงทุนสัมพันธ์ (Investor Relations)</h2>
+                    <h3 class="text-3xl md:text-4xl font-bold mb-4">ข้อมูลทางการเงินและความโปร่งใส</h3>
+                </div>
+                <a href="#" class="text-red-400 hover:text-white transition flex items-center mt-4 md:mt-0">
+                    ดูรายงานประจำปี (Annual Reports) <i class="fa-solid fa-arrow-right ml-2"></i>
+                </a>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+                <div class="bg-gray-800/50 p-6 rounded-xl border border-gray-700">
+                    <p class="text-gray-400 text-sm mb-1">รายได้รวม (ปีล่าสุด)</p>
+                    <h4 class="text-3xl font-bold text-white">125,400 <span class="text-sm text-gray-500 font-normal">ล้านบาท</span></h4>
+                    <p class="text-green-400 text-sm mt-2"><i class="fa-solid fa-arrow-trend-up"></i> +8.5% YoY</p>
+                </div>
+                <div class="bg-gray-800/50 p-6 rounded-xl border border-gray-700">
+                    <p class="text-gray-400 text-sm mb-1">กำไรสุทธิ</p>
+                    <h4 class="text-3xl font-bold text-white">18,200 <span class="text-sm text-gray-500 font-normal">ล้านบาท</span></h4>
+                    <p class="text-green-400 text-sm mt-2"><i class="fa-solid fa-arrow-trend-up"></i> +5.2% YoY</p>
+                </div>
+                <div class="bg-gray-800/50 p-6 rounded-xl border border-gray-700">
+                    <p class="text-gray-400 text-sm mb-1">เงินปันผลต่อหุ้น</p>
+                    <h4 class="text-3xl font-bold text-white">4.25 <span class="text-sm text-gray-500 font-normal">บาท</span></h4>
+                    <p class="text-gray-400 text-sm mt-2">จ่ายปันผลปีละ 2 ครั้ง</p>
+                </div>
+                <div class="bg-gray-800/50 p-6 rounded-xl border border-gray-700">
+                    <p class="text-gray-400 text-sm mb-1">โครงสร้างผู้ถือหุ้นหลัก</p>
+                    <ul class="text-sm mt-2 space-y-1 text-gray-300">
+                        <li class="flex justify-between"><span>บริษัท โฮลดิ้ง กรุ๊ป</span> <span>45%</span></li>
+                        <li class="flex justify-between"><span>นักลงทุนสถาบัน</span> <span>30%</span></li>
+                        <li class="flex justify-between"><span>รายย่อย (Public)</span> <span>25%</span></li>
+                    </ul>
                 </div>
             </div>
             
-            <div class="footer-links">
-                <h4>ลิงก์ด่วน</h4>
-                <ul>
-                    <li><a href="#about">เกี่ยวกับเรา</a></li>
-                    <li><a href="#structure">ผู้บริหารและทีมงาน</a></li>
-                    <li><a href="#">นักลงทุนสัมพันธ์</a></li>
-                    <li><a href="#news">ข่าวสารองค์กร</a></li>
-                </ul>
-            </div>
-
-            <div class="footer-links">
-                <h4>ติดต่อเรา</h4>
-                <ul>
-                    <li><i class="fas fa-map-marker-alt"></i> สำนักงานใหญ่ BCU Tower, กรุงเทพมหานคร</li>
-                    <li><i class="fas fa-phone"></i> 02-XXX-XXXX</li>
-                    <li><i class="fas fa-envelope"></i> contact@bcuconnect.co.th</li>
-                    <li><i class="fas fa-clock"></i> จันทร์ - ศุกร์ 08:30 - 17:30 น.</li>
-                </ul>
+            <div class="bg-red-900/20 border border-red-900/50 rounded-xl p-6 flex flex-col md:flex-row justify-between items-center">
+                <div>
+                    <h4 class="font-bold text-lg mb-1"><i class="fa-solid fa-bullhorn text-red-500 mr-2"></i> ประกาศแจ้งมติที่ประชุมผู้ถือหุ้น</h4>
+                    <p class="text-sm text-gray-400">การประชุมสามัญผู้ถือหุ้นประจำปี 2569 (AGM)</p>
+                </div>
+                <button class="mt-4 md:mt-0 bg-gray-800 hover:bg-gray-700 px-6 py-2 rounded-full text-sm font-medium transition">ดาวน์โหลดเอกสาร PDF</button>
             </div>
         </div>
-        <div class="footer-bottom">
-            <p>&copy; 2026 BCU CONNECT Public Company Limited. All Rights Reserved.</p>
+    </section>
+
+    <section id="esg" class="py-24 bg-white relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                <div class="order-2 lg:order-1">
+                    <div class="bg-white rounded-2xl shadow-2xl p-8 border border-gray-100 relative">
+                        <div class="absolute -top-4 -left-4 w-20 h-20 bg-green-50 rounded-full flex items-center justify-center border border-green-100">
+                            <i class="fa-solid fa-leaf text-3xl text-green-600"></i>
+                        </div>
+                        <h4 class="text-xl font-bold text-gray-900 mb-6 mt-4 text-center">Real-time Carbon Dashboard</h4>
+                        <div class="text-center mb-8">
+                            <p class="text-sm text-gray-500 mb-2">ปริมาณการปล่อยคาร์บอนสุทธิ (Net-Zero Tracker)</p>
+                            <div class="text-5xl font-bold text-gray-900 font-mono tracking-tighter">
+                                <span id="carbon-counter">24,592</span> <span class="text-xl text-gray-400 font-sans">tCO2e</span>
+                            </div>
+                            <p class="text-sm text-green-600 font-medium mt-2"><i class="fa-solid fa-arrow-down"></i> ลดลง 15% จากปีที่ผ่านมา</p>
+                        </div>
+                        <div class="space-y-4">
+                            <div>
+                                <div class="flex justify-between text-xs mb-1">
+                                    <span class="text-gray-600">พลังงานหมุนเวียนใน Data Center</span>
+                                    <span class="font-bold">78%</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2">
+                                    <div class="bg-green-500 h-2 rounded-full" style="width: 78%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between text-xs mb-1">
+                                    <span class="text-gray-600">การจัดการ E-Waste</span>
+                                    <span class="font-bold">95%</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2">
+                                    <div class="bg-green-500 h-2 rounded-full" style="width: 95%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="order-1 lg:order-2">
+                    <h2 class="text-sm font-bold text-green-600 uppercase tracking-wider mb-2">ESG & Sustainability</h2>
+                    <h3 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6">ความยั่งยืนและ<br>ความรับผิดชอบต่อสังคม</h3>
+                    <p class="text-gray-600 mb-6 leading-relaxed">
+                        ที่ BCU เราไม่เพียงเชื่อมต่อข้อมูล แต่เราเชื่อมโยงคุณภาพชีวิต เรามีเป้าหมายที่จะบรรลุ Net-Zero Emissions ภายในปี 2040 ผ่านการใช้พลังงานสะอาดในศูนย์ข้อมูลและเสาสัญญาณทั้งหมด
+                    </p>
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-start">
+                            <i class="fa-solid fa-circle-check text-green-500 mt-1 mr-3"></i>
+                            <div>
+                                <strong class="block text-gray-900">Environment (สิ่งแวดล้อม)</strong>
+                                <span class="text-sm text-gray-600">โครงการปลูกป่าดิจิทัล และนโยบาย Green Data Center</span>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa-solid fa-circle-check text-blue-500 mt-1 mr-3"></i>
+                            <div>
+                                <strong class="block text-gray-900">Social (สังคม)</strong>
+                                <span class="text-sm text-gray-600">CSR โครงการอินเทอร์เน็ตเพื่อน้องในถิ่นทุรกันดาร ลดความเหลื่อมล้ำทางดิจิทัล</span>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa-solid fa-circle-check text-yellow-500 mt-1 mr-3"></i>
+                            <div>
+                                <strong class="block text-gray-900">Governance (ธรรมาภิบาล)</strong>
+                                <span class="text-sm text-gray-600">ดำเนินธุรกิจอย่างโปร่งใส ตรวจสอบได้ และต่อต้านการทุจริตทุกรูปแบบ</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="organization" class="py-24 bg-bcu-gray border-t border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-sm font-bold text-bcu-red uppercase tracking-wider mb-2">Organization & Careers</h2>
+                <h3 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">ร่วมเป็นส่วนหนึ่งของ BCU</h3>
+                <p class="text-gray-600">องค์กรที่ขับเคลื่อนด้วยนวัตกรรม และให้ความสำคัญกับบุคลากรเป็นอันดับหนึ่ง</p>
+            </div>
+
+            <div id="culture" class="mb-20">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+                    <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100">
+                        <h4 class="text-xl font-bold text-gray-900 mb-4"><i class="fa-solid fa-shirt text-bcu-red mr-2"></i> นโยบายการแต่งกาย (Dress Code)</h4>
+                        <p class="text-gray-600 mb-4">เราเชื่อในความอิสระทางความคิด นโยบายการแต่งกายของเราคือ <strong>"Smart Casual & Express Yourself"</strong> พนักงานสามารถแต่งกายสุภาพที่สะท้อนตัวตนได้ ยกเว้นวันที่มีการประชุมกับลูกค้าระดับองค์กร (Formal Business)</p>
+                    </div>
+                    <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100">
+                        <h4 class="text-xl font-bold text-gray-900 mb-4"><i class="fa-solid fa-building-user text-bcu-red mr-2"></i> โซนพื้นที่ออฟฟิศ (BCU Tower)</h4>
+                        <ul class="text-sm text-gray-600 space-y-2">
+                            <li><strong class="text-gray-900">Fl. 1-3 : BCU Space</strong> - พื้นที่ Co-working, ร้านกาแฟ และ Random Chat Zone สำหรับแลกเปลี่ยนไอเดียข้ามแผนก</li>
+                            <li><strong class="text-gray-900">Fl. 10-15 : Innovation Lab</strong> - โซนวิศวกร, สถาปัตยกรรมโครงข่าย และนักพัฒนา</li>
+                            <li><strong class="text-gray-900">Fl. 20-25 : Business Hub</strong> - การตลาด, บัญชี, HR, บริหารงานลูกค้า</li>
+                            <li><strong class="text-gray-900">Fl. 30 : Executive & IR</strong> - ผู้บริหารและนักลงทุนสัมพันธ์</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <h4 class="text-2xl font-bold text-gray-900 mb-8 text-center border-b pb-4">สายงานและตำแหน่งงาน (Departments)</h4>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
+                <div class="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition">
+                    <h5 class="font-bold text-lg text-bcu-red mb-2">ฝ่ายบัญชีและการเงิน (Finance & Accounting)</h5>
+                    <ul class="text-sm text-gray-600 list-disc list-inside">
+                        <li>CFO / Financial Director</li>
+                        <li>Accountant / Senior Accountant</li>
+                        <li>Financial Analyst (IR Support)</li>
+                        <li>Auditor / Compliance Officer</li>
+                    </ul>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition">
+                    <h5 class="font-bold text-lg text-bcu-red mb-2">ทรัพยากรบุคคล (HR & Admin)</h5>
+                    <ul class="text-sm text-gray-600 list-disc list-inside">
+                        <li>HR Business Partner</li>
+                        <li>Talent Acquisition Specialist</li>
+                        <li>Compensation & Benefits</li>
+                        <li>Office Manager</li>
+                    </ul>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition">
+                    <h5 class="font-bold text-lg text-bcu-red mb-2">การตลาดและขาย (Marketing & Sales)</h5>
+                    <ul class="text-sm text-gray-600 list-disc list-inside">
+                        <li>CMO / Marketing Director</li>
+                        <li>B2B Enterprise Account Executive</li>
+                        <li>Digital Marketing / SEO Specialist</li>
+                        <li>PR & Corporate Communication</li>
+                    </ul>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition">
+                    <h5 class="font-bold text-lg text-bcu-red mb-2">วิศวกรรม (Engineering & IT)</h5>
+                    <ul class="text-sm text-gray-600 list-disc list-inside">
+                        <li>Network Engineer (5G/Fiber)</li>
+                        <li>Cloud / DevOps Engineer</li>
+                        <li>Cybersecurity Specialist</li>
+                        <li>Software Developer (Frontend/Backend)</li>
+                    </ul>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition">
+                    <h5 class="font-bold text-lg text-bcu-red mb-2">ออกแบบและกราฟิก (Design & Creative)</h5>
+                    <ul class="text-sm text-gray-600 list-disc list-inside">
+                        <li>UX/UI Designer</li>
+                        <li>Graphic Designer</li>
+                        <li>Motion Graphic / Video Editor</li>
+                        <li>Creative Copywriter</li>
+                    </ul>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition">
+                    <h5 class="font-bold text-lg text-bcu-red mb-2">สถาปัตยกรรมโครงข่าย (Network Architecture)</h5>
+                    <ul class="text-sm text-gray-600 list-disc list-inside">
+                        <li>System Architect</li>
+                        <li>Data Center Infrastructure Architect</li>
+                        <li>IoT Solutions Architect</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-2xl shadow-xl overflow-hidden">
+                <div class="grid grid-cols-1 lg:grid-cols-2">
+                    <div class="p-10 lg:p-12">
+                        <h4 class="text-2xl font-bold text-gray-900 mb-2">สมัครงาน (Job Openings)</h4>
+                        <p class="text-gray-600 mb-6">สวัสดิการ: ลาพักร้อน 15 วัน, ประกันสุขภาพ (ครอบคลุมครอบครัว), โบนัสตามผลประกอบการ, กองทุนสำรองเลี้ยงชีพ</p>
+                        
+                        <div class="space-y-4 mb-8">
+                            <div class="border p-4 rounded-lg flex justify-between items-center hover:border-bcu-red transition cursor-pointer">
+                                <div><strong class="block">Senior Cloud Engineer</strong><span class="text-xs text-gray-500">วิศวกรรม | Full-time | รูปแบบ Hybrid</span></div>
+                                <i class="fa-solid fa-chevron-right text-gray-400"></i>
+                            </div>
+                            <div class="border p-4 rounded-lg flex justify-between items-center hover:border-bcu-red transition cursor-pointer">
+                                <div><strong class="block">B2B Sales Executive</strong><span class="text-xs text-gray-500">ขายและการตลาด | Full-time | On-site</span></div>
+                                <i class="fa-solid fa-chevron-right text-gray-400"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-gray-50 p-10 lg:p-12 border-l">
+                        <h4 class="text-xl font-bold text-gray-900 mb-4">ส่งเรซูเม่ (Apply Now)</h4>
+                        <form action="#" method="POST" class="space-y-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">ชื่อ-นามสกุล</label>
+                                <input type="text" class="w-full border-gray-300 rounded-lg p-2.5 border focus:ring-bcu-red focus:border-bcu-red outline-none">
+                            </div>
+                            <div class="grid grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">อีเมล</label>
+                                    <input type="email" class="w-full border-gray-300 rounded-lg p-2.5 border focus:ring-bcu-red focus:border-bcu-red outline-none">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">เบอร์โทรศัพท์</label>
+                                    <input type="tel" class="w-full border-gray-300 rounded-lg p-2.5 border focus:ring-bcu-red focus:border-bcu-red outline-none">
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">ตำแหน่งที่สนใจ</label>
+                                <select class="w-full border-gray-300 rounded-lg p-2.5 border focus:ring-bcu-red focus:border-bcu-red outline-none bg-white">
+                                    <option>เลือกตำแหน่ง...</option>
+                                    <option>Senior Cloud Engineer</option>
+                                    <option>B2B Sales Executive</option>
+                                    <option>อื่นๆ (โปรดระบุในเรซูเม่)</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">แนบไฟล์ Resume (PDF)</label>
+                                <input type="file" class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-red-50 file:text-red-700 hover:file:bg-red-100 cursor-pointer">
+                            </div>
+                            <button type="button" class="w-full gradient-bg text-white font-bold py-3 rounded-lg hover:shadow-lg transition mt-4">ยื่นใบสมัคร</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="py-0 relative">
+        <div class="flex flex-col md:flex-row">
+            <div class="w-full md:w-1/2 h-[500px] bg-gray-200 relative">
+                <img src="https://images.unsplash.com/photo-1524661135-423995f22d0b?q=80&w=2074&auto=format&fit=crop" alt="Map View" class="w-full h-full object-cover grayscale opacity-80">
+                <div class="absolute inset-0 bg-bcu-dark/10"></div>
+                <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center drop-shadow-xl">
+                    <i class="fa-solid fa-location-dot text-5xl text-bcu-red mb-2 animate-bounce"></i>
+                    <div class="bg-white text-bcu-dark px-4 py-2 rounded-lg font-bold text-sm shadow-lg">BCU Tower</div>
+                </div>
+            </div>
+            
+            <div class="w-full md:w-1/2 bg-bcu-dark text-white p-12 lg:p-20 flex flex-col justify-center">
+                <h2 class="text-sm font-bold text-red-500 uppercase tracking-wider mb-2">Contact Us & Help Center</h2>
+                <h3 class="text-3xl font-bold mb-8">ติดต่อบีซียู คอนเนค</h3>
+                
+                <div class="space-y-6">
+                    <div class="flex items-start">
+                        <i class="fa-solid fa-building text-red-500 text-xl w-8 mt-1"></i>
+                        <div>
+                            <strong class="block mb-1">สำนักงานใหญ่ (BCU Tower)</strong>
+                            <p class="text-gray-400 text-sm">999 ถนนพระราม 9 แขวงห้วยขวาง<br>เขตห้วยขวาง กรุงเทพมหานคร 10310</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <i class="fa-solid fa-phone text-red-500 text-xl w-8 mt-1"></i>
+                        <div>
+                            <strong class="block mb-1">ศูนย์บริการลูกค้า (Call Center)</strong>
+                            <p class="text-gray-400 text-sm">โทร: 1234 (ตลอด 24 ชั่วโมง)</p>
+                            <p class="text-gray-400 text-sm">ฝ่ายขายองค์กร: 02-XXX-XXXX</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <i class="fa-solid fa-envelope text-red-500 text-xl w-8 mt-1"></i>
+                        <div>
+                            <strong class="block mb-1">อีเมลติดต่อ (ตามแผนก)</strong>
+                            <p class="text-gray-400 text-sm">ลูกค้าทั่วไป: support@bcuconnect.co.th</p>
+                            <p class="text-gray-400 text-sm">นักลงทุนสัมพันธ์: ir@bcuconnect.co.th</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-black text-gray-400 py-12 border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+                <div class="col-span-1 md:col-span-2">
+                    <span class="text-2xl font-bold tracking-tighter text-white mb-4 block">BCU CONNECT</span>
+                    <p class="text-sm max-w-sm">บริษัท บีซียู คอนเนค จำกัด (มหาชน) ผู้นำด้านโครงข่ายโทรคมนาคมและนวัตกรรมดิจิทัล เพื่อการเชื่อมต่อที่ไร้ขีดจำกัด</p>
+                </div>
+                <div>
+                    <h5 class="text-white font-bold mb-4 uppercase text-sm">นโยบาย (Legal & Compliance)</h5>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#" class="hover:text-red-500 transition">นโยบายความเป็นส่วนตัว (Privacy Policy / PDPA)</a></li>
+                        <li><a href="#" class="hover:text-red-500 transition">นโยบายการใช้คุกกี้ (Cookie Policy)</a></li>
+                        <li><a href="#" class="hover:text-red-500 transition">ข้อตกลงและเงื่อนไข (Terms of Service)</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h5 class="text-white font-bold mb-4 uppercase text-sm">ช่องทางแจ้งเบาะแส</h5>
+                    <ul class="space-y-2 text-sm mb-4">
+                        <li><a href="#" class="hover:text-red-500 transition text-red-400"><i class="fa-solid fa-shield-halved mr-1"></i> Whistleblowing System</a></li>
+                        <li><span class="text-xs">ระบบรับแจ้งการทุจริตและคอร์รัปชัน</span></li>
+                    </ul>
+                    <div class="flex space-x-4 mt-4">
+                        <a href="#" class="text-gray-400 hover:text-white text-xl"><i class="fa-brands fa-facebook"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white text-xl"><i class="fa-brands fa-x-twitter"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white text-xl"><i class="fa-brands fa-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center text-xs">
+                <p>&copy; 2026 BCU CONNECT Public Company Limited. All rights reserved.</p>
+                <p class="mt-2 md:mt-0">Designed for Future Connectivity.</p>
+            </div>
         </div>
     </footer>
 
+    <div class="fixed bottom-6 right-6 z-50 flex flex-col items-end space-y-3">
+        <button class="bg-white text-bcu-dark border shadow-lg rounded-full px-4 py-2 text-sm font-bold hover:bg-gray-50 transition hidden md:flex items-center">
+            <i class="fa-solid fa-shuffle text-bcu-red mr-2"></i> Employee Random Chat
+        </button>
+        <button class="w-14 h-14 gradient-bg rounded-full text-white shadow-2xl flex items-center justify-center text-2xl hover:scale-110 transition transform">
+            <i class="fa-solid fa-headset"></i>
+        </button>
+    </div>
+
+    <div id="cookie-banner" class="fixed bottom-0 w-full bg-white border-t shadow-[0_-10px_40px_rgba(0,0,0,0.1)] z-[100] transform transition-transform duration-500 translate-y-0">
+        <div class="max-w-7xl mx-auto px-4 py-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row justify-between items-center">
+            <div class="mb-4 sm:mb-0 text-sm text-gray-600 max-w-3xl">
+                เว็บไซต์นี้ใช้คุกกี้เพื่อนำเสนอเนื้อหาและโฆษณาที่ท่านอาจสนใจ เพื่อให้ท่านได้รับประสบการณ์ที่ดียิ่งขึ้น รวมถึงเพื่อรวบรวมสถิติการเข้าใช้งานเว็บไซต์ ท่านสามารถศึกษารายละเอียดได้ที่ <a href="#" class="text-bcu-red underline">นโยบายการใช้คุกกี้</a>
+            </div>
+            <div class="flex space-x-3 shrink-0">
+                <button id="cookie-settings" class="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-lg transition">ตั้งค่าคุกกี้</button>
+                <button id="cookie-accept" class="px-6 py-2 text-sm font-medium text-white gradient-bg rounded-lg hover:shadow-lg transition">ยอมรับทั้งหมด</button>
+            </div>
+        </div>
+    </div>
+
     <script>
-        // ระบบเมนู Hamburger สำหรับมือถือ
-        const menuToggle = document.querySelector('.menu-toggle');
-        const navLinks = document.querySelector('.nav-links');
-        const navItems = document.querySelectorAll('.nav-item');
-
-        menuToggle.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
-            if(navLinks.classList.contains('active')){
-                menuToggle.innerHTML = '<i class="fas fa-times"></i>';
-            } else {
-                menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
-            }
+        // ระบบปิด-เปิด เมนูมือถือ
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+        btn.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
         });
 
-        // ปิดเมนูอัตโนมัติเมื่อกดเลือกลิงก์ (บนมือถือ)
-        navItems.forEach(item => {
-            item.addEventListener('click', () => {
-                navLinks.classList.remove('active');
-                menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
-            });
+        // ระบบปิดแบนเนอร์คุกกี้
+        const cookieBanner = document.getElementById('cookie-banner');
+        const cookieAccept = document.getElementById('cookie-accept');
+        cookieAccept.addEventListener('click', () => {
+            cookieBanner.style.transform = 'translateY(100%)';
+            setTimeout(() => cookieBanner.style.display = 'none', 500);
         });
-        
-        // เพิ่มเอฟเฟกต์ Navbar เมื่อเลื่อนจอ
-        window.addEventListener('scroll', () => {
-            const header = document.querySelector('header');
-            if (window.scrollY > 50) {
-                header.style.boxShadow = '0 5px 20px rgba(0,0,0,0.1)';
-            } else {
-                header.style.boxShadow = '0 2px 10px rgba(0,0,0,0.05)';
+
+        // แอนิเมชันตัวเลข Carbon Footprint แบบสุ่มลดลงเล็กน้อย
+        setInterval(() => {
+            const counter = document.getElementById('carbon-counter');
+            if(counter) {
+                let val = parseInt(counter.innerText.replace(',',''));
+                // จำลองข้อมูลเรียลไทม์ขยับเล็กน้อย
+                if(Math.random() > 0.5) val -= Math.floor(Math.random() * 3);
+                counter.innerText = val.toLocaleString();
             }
-        });
+        }, 3000);
     </script>
 </body>
 </html>
